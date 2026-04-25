@@ -95,7 +95,7 @@ def main():
         output += response[0]
         output += "\n\n---\n"
 
-        with open(f'{args.model}_response.md', 'a') as out_file:
+        with open(f'{args.model.replace('/', '_')}_response.md', 'a') as out_file:
             out_file.write(output)
 
 

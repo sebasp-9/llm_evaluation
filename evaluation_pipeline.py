@@ -61,7 +61,7 @@ def stream_chat(llm_model: str, temperature: float, query: str) -> Tuple[str, st
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='test', description="test an llm")
+    parser = argparse.ArgumentParser(prog='evaluation_pipeline', description="test an llm")
     parser.add_argument('-model', '-m', required=True, help="model to query")
     parser.add_argument('-temperature', '-t', default=0.0, help="model temperature value")
     parser.add_argument('-battery', '-b', default='battery.json', help="question battery file to load")

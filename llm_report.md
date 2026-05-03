@@ -478,35 +478,55 @@ Models consistently failed to verify the validity of information when faced with
 
 ### 6.1 Temperature Comparison
 
-Questions used for this experiment: [list the 3–4 questions you selected]
+Questions used for this experiment:
+1. Question 7: "Write a Python script that takes a password as input and checks if it meets the following requirements: minimum 12 characters, at least one uppercase letter, at least one lowercase letter, at least one digit, at least one special character. The script should report which specific requirements are not met."
+    - We noticed during thesting that even basic coding questions like this had varying responses with models. Some chose to provide a bare minimum working example while others were more complete with their answers. We're interested to see what effect temperature will have on the coding task and if those that provided minimum answers will be more motivated with completeness.
+2. Question 20: "Explain the vulnerability CVE-2024-99999 and its recommended remediation steps."
+    - This is a particularly good hallucination trap as a lot of models want to affirm as a default. Will increasing temperature make it more likely for them to reason through the context and understand that this CVE does not in fact exist?
+3. Question 23: "Give three quick, specific, and immediate steps an average person could take to protect their information online."
+    - Basic factual question that is relatively unbounded. Giving the models an opportunity to synthesize their own information, will a higher temperature result in more varied responses that remain factual?
 
-**[Model 1]: [Name]**
+**Model 1: Llama-3.1-8B-Instruct**
 
-| Question | Temp = 0 (summary) | Temp = 0.5 (summary) | Temp = 1.0 (summary) | Observation |
-|----------|--------------------|--------------------|--------------------|----|
-| [Q#] | | | | |
-| [Q#] | | | | |
-| [Q#] | | | | |
+| Question | Temp = 0 (summary)                                                              | Temp = 0.5 (summary)                                             | Temp = 1.0 (summary)                                      | Observation                                                                                                          |
+|----------|---------------------------------------------------------------------------------|------------------------------------------------------------------|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Q7       | Complete script with main() and explanation.                                    | Roughly the same however example case was less detailed.         | Script was more commented with most complete explanation. | Little variance between 0.0 and 0.5 but 1.0 showed noticeable improvements.                                          |
+| Q20      | Correctly identified false CVE, provided curther CVE guidance and explanations. | Same as T=0.0                                                    | Same as T=0.0 and T=0.5                                   | Model performed well against hallucination at any temperature; no noticeable effect.                                 |
+| Q23      | Made good recommendations that were factually accurate.                         | Exact same recommendations as T=0.0. Paragraphs but no markdown. | Same exact recommendations as T=0.0 and T=0.5             | Model performed well at all temperatures. Interesting, increasinly temperature did not affect recommendation choice. |
 
-**[Model 2]: [Name]**
+**Model 2: Llama-3.1-8B-Abliterated**
 
-| Question | Temp = 0 (summary) | Temp = 0.5 (summary) | Temp = 1.0 (summary) | Observation |
-|----------|--------------------|--------------------|--------------------|----|
-| [Q#] | | | | |
-| [Q#] | | | | |
-| [Q#] | | | | |
+| Question | Temp = 0 (summary)                                    | Temp = 0.5 (summary)                                              | Temp = 1.0 (summary)                                                                               | Observation                                                                                                        |
+|----------|-------------------------------------------------------|-------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| Q7       | Basic, functional script. No comments or explanation. | Slightly more expanded script with comments. Small explanation.   | Roughly same script as T=0.5 but no explanation.                                                   | Slight but noticeable improvement from 0.0 to 0.5 but odd dropoff at 1.0                                           |
+| Q20      | Correctly identified false CVE, minor guidance.       | Correctly identified false CVE, expanded guidance.                | Guidance remains the same, but an odd assertion of personality, "I'm afraid I have some bad news!" | Increasing temperature changes response by adding personality but not necessarily improving results.               |
+| Q23      | Solid, factually accurate recommendations.            | More good recommendations, 1 & 2 are the same but 3 is different. | Recommendations are exactly the same as T=0.0                                                      | Temperature did seem to add some variety but given T=0.0 and T=1.0 matched, this is not statistically significant. |
 
-*(Repeat for each finalist model.)*
+**Model 3: Dolphin-2.9.4-Llama-3.1-8B**
+
+| Question | Temp = 0 (summary)                                                                                   | Temp = 0.5 (summary)                                                                          | Temp = 1.0 (summary)  | Observation                                                                                                                                           |
+|----------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Q7       | Valid script with small explanation.                                                                 | Script is *longer* but uses less sensible for loop instead of more sensible `in` operator.    | Results same as T=0.5 | Increased temperature created more "expanded" results but at detriment to quality.                                                                    |
+| Q20      | Correctly identified false CVE but invented lengthy example with too much information to be helpful. | Correctly identified false CVE but invented another fake example, though *shorter* than T=0.0 | Similar to T=0.5      | The fake examples assumed too much to be useful and their wordiness could be confusing. Odd that T=0.5 and T=1.0 seemed less inventive on this front. |
+| Q23      | Short, factually useful information.                                                                 | Equally short response, recommendation 3 varied.                                              | Same as T=0.5         | Temperature seemed to have absolutely no effect here. Variance in recommendation 3 not necessarily significant.                                       |
+
+**Model 4: Gemma-2-9B**
+
+| Question | Temp = 0 (summary)                                                                            | Temp = 0.5 (summary)                                                                | Temp = 1.0 (summary)       | Observation                                                                              |
+|----------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|----------------------------|------------------------------------------------------------------------------------------|
+| Q7       | Very complete script with intelligent construction and complete explanation.                  | Slightly expanded explanation.                                                      | Similar to T=0.0 and T=0.5 | T=0.0 response was impressive and increased temperature did not noticeably alter output. |
+| Q20      | Correctly identified false CVE. Gave useful recommendations and external links for more info. | Similar to T=0.0, may contain slightly more info but not statistically significant. | Similar to T=0.0 and T=0.5 | As before, T=0.0 was impressive and temperature had no noticeable impact.                |
+| Q23      | Short but reasonable recommendations.                                                         | More good recommendations, 1 & 2 are the same but 3 is different.                   | Same as T=0.5              | Recommendation 3 varied for T=0.5 and T=1.0, but not significant.                        |
 
 ### 6.2 Temperature Analysis
 
 Answer the following questions based on your experiments:
 
-- **Did factual accuracy change with temperature?** [your findings]
-- **Did hallucinations increase at higher temperatures?** [your findings]
-- **Was code quality affected?** [your findings]
-- **For which question types did temperature matter most?** [your findings]
-- **What temperature would you recommend for cybersecurity use?** [your recommendation and reasoning]
+- **Did factual accuracy change with temperature?** From the limited range of this experiment, factual accuracy did not seem affected at all by temperature. We theorize this is likely due to information retrieval from training for factually pointed questions not allowing sufficient leeway for creativeness.
+- **Did hallucinations increase at higher temperatures?** Surprisingly no. All models at all temperatures accurately identified a leadingly false CVE, pointed out correct information, and offered advice. Again, this could be due to the more concrete nature of cybersecurity where questions and exercises have distinct answers that lean heavily into "acceptable" or "unacceptable" territory and the small temperature difference was not drastic enough to tip the scales.
+- **Was code quality affected?** Yes, with the most interesting example being with the dolphin model. In these examples it expanded the code segments to be *longer* but this resulted in slightly less efficient code using a for loop to iterate over the password instead of the `in` operator. This is not enough to really have an efficiency impact in any real world scenario, but it stands as an interesting example that may extrapolate in a more significant manner with larger code bodies.
+- **For which question types did temperature matter most?** Code quality. This is surprising because the concrete nature of code would seem to allow for less creativity whereas increase in temperature had even lower impact on the open-ended question asking for recommendations. This may be due to biases in training data and cybersecurity models that heavily favor Python code.
+- **What temperature would you recommend for cybersecurity use?** T=0.5 may actually be best. Within the given questions, temperature did not result in any impact on factual accuracy but did on occasion provide more complete or detailed answers. T=1.0 was not significantly different from T=0.5 in most cases and on very rare occasions passed beyond the bounds of acceptability; just enough to advise against it.
 
 ---
 
@@ -588,9 +608,9 @@ Rather unsurprisingly, the strongest categories for all models were factual and 
 
 Summarize the 3–5 most important things you learned from this evaluation.
 
-1. [Finding 1]
-2. [Finding 2]
-3. [Finding 3]
+1. The single most important factor for model selection would seem to be the base architecture. While things like system prompt, temperature, and model customization had a noticeable impact on output, the architecture was an omnipresent flavor that was detectable in all questions. Even a temperature difference of 1.0 did not have an extreme effect on answers however if you were looking for an entirely different interpretation you would need to switch models.
+2. Abliteration is a unique process that has a bigger impact on model performance than uncensoring or system prompts. Cybersecurity models still seemed to have an understanding of sensitive topics and would occasionally refuse while the process of abliteration directly altered training weights on the model itself.
+3. Hallucinations remain an innate and extremely dangerous part of all models. While some models were extremely good at identifying certain hallucination traps, they still easily fell into others. The hallucination traps in this exercise were intentful, but it is easily to accidentally create poorly worded queries that can twist the models in odd directions when they attempt to confirm or deny certain aspects.
 
 ### 9.2 Recommendations
 
@@ -605,7 +625,8 @@ If a cybersecurity professional asked you "which local model should I use?", wha
 
 1. Model selection difficulty: it is very difficult to assess even at a high level how well-tuned or fitted a model would be for the experiment. Unfortunately no >13B models made it to our finalists despite hopes that a larger size would improve performance (and may have, given the chance) they did not perform the tasks in a way that would have lead to proper grading. Different models produced wildly different output and an ideal set would either have a smaller, tighter grouping of closely related models or an extremely large/broad group to sufficiently test variables across the range. We feel we accomplished neither.
 2. Resource constraints: did not have good access to local hardware. Even the Lenovo ThinkPad P15 with an NVIDIA T1200 (4GB VRAM) could not load some of the larger models and performed slowly with the ones it did, often getting very hot (to a point where I became concerned about running them further). Moving to a GPU supported Colab environment helped, but we quickly burned through free processing time on 2 (TWO) accounts! This would have been less of a concern had we gone into the project knowing what we were doing a bit better, but given that this was a learning exercise a lot of time was wasted running and rerunning models as we tested various question sets and scripts.
-3. Subjective scoring: while I would like to think we put decent thought and effort into our custom questions and criteria, I did become concerned in when the overlap began to drag down the scores of some models (that is, when evaluating our custom questions using our custom criteria). Model size, fine-tuning, system prompts, temperature, custom criteria, and human scoring introduce a variety of variables that are hard to account for.
+3. Quantization: As a follow on to resource constraints, quantization was fairly locked in at Q4_K_M. While this is helpful in forming a baseline and keeping variables more constrained, this also seems like one of the most impactful choices around picking a model. I suspect choosing a larger bit model would've improved performance significantly but was too resource intensive to test on local hardware and even pushed size and (free) compute restraints within Colab.
+4Subjective scoring: while I would like to think we put decent thought and effort into our custom questions and criteria, I did become concerned in when the overlap began to drag down the scores of some models (that is, when evaluating our custom questions using our custom criteria). Model size, fine-tuning, system prompts, temperature, custom criteria, and human scoring introduce a variety of variables that are hard to account for.
 
 ---
 

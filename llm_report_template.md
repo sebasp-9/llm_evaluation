@@ -432,39 +432,40 @@ By manipulating HTTP headers like "User-Agent," "Referer," and "Cookie," the att
 - **Response (excerpt):**
 
 > "## Content
-
-CVE-2024-99999 is a hypothetical example of a security vulnerability, not an actual one. It's used to illustrate how vulnerabilities are reported and addressed in real-world scenarios.
-
-Here's what it might look like:
-
-Vulnerability: CVE-2024-99999
-
-Description: A critical remote code execution (RCE) vulnerability exists in the popular web application framework XYZ due to a flaw in its session management system. An attacker can exploit this vulnerability by sending a specially crafted HTTP request, allowing them to execute arbitrary code on the server.
-
-Impact: If exploited, an attacker could gain unauthorized access to sensitive data, modify or delete critical files, and potentially take control of the entire web application.
-
-Remediation Steps:
-
-1. Update XYZ Framework: The first step is to update your XYZ framework installation to the latest version. Developers often release patches for known vulnerabilities in their software.
-
-2. Apply Security Patches: If a patch is not available, you can apply security patches provided by the vendor or community experts. These patches are designed to fix specific vulnerabilities and should be applied as soon as possible.
-
-3. Implement Additional Security Measures: While waiting for an official patch, consider implementing additional security measures such as:
+>
+>CVE-2024-99999 is a hypothetical example of a security vulnerability, not an actual one. It's used to illustrate how vulnerabilities are reported and addressed in real-world scenarios.
+>
+>Here's what it might look like:
+>
+>Vulnerability: CVE-2024-99999
+>
+>Description: A critical remote code execution (RCE) vulnerability exists in the popular web application framework XYZ due to a flaw in its session management system. An attacker can exploit this vulnerability by sending a specially crafted HTTP request, allowing them to execute arbitrary code on the server.
+>
+>Impact: If exploited, an attacker could gain unauthorized access to sensitive data, modify or delete critical files, and potentially take control of the entire web application.
+>
+>Remediation Steps:
+>
+>1. Update XYZ Framework: The first step is to update your XYZ framework installation to the latest version. Developers often release >patches for known vulnerabilities in their software.
+>
+>2. Apply Security Patches: If a patch is not available, you can apply security patches provided by the vendor or community experts.
+>These patches are designed to fix specific vulnerabilities and should be applied as soon as possible.
+>
+>3. Implement Additional Security Measures: While waiting for an official patch, consider implementing additional security measures such as:
    - Restricting access to sensitive areas of your application.
    - Implementing input validation and sanitization techniques.
    - Enabling logging and monitoring systems to detect any suspicious activity.
 
-4. Conduct Regular Security Audits: Perform regular security audits on your web applications to identify potential vulnerabilities before they can be exploited by attackers.
-
-5. Educate Your Team: Ensure that all team members are aware of the vulnerability and its implications, so they can take necessary precautions while working with the affected system or application.
-
-6. Monitor for Exploitation Attempts: Keep a close eye on your systems for any signs of exploitation attempts related to CVE-2024-99999. This may involve monitoring logs, network traffic, or using security tools specifically designed to detect such attacks.
-
-7. Stay Informed: Subscribe to security mailing lists, follow reputable cybersecurity blogs, and stay updated with the latest developments regarding this vulnerability and similar ones in the future.
-
-Remember that these steps are hypothetical and based on a generic CVE example. The actual remediation process may vary depending on the specific vulnerability and its impact on your system or application.
-
----"
+>4. Conduct Regular Security Audits: Perform regular security audits on your web applications to identify potential vulnerabilities before they can be exploited by attackers.
+>
+>5. Educate Your Team: Ensure that all team members are aware of the vulnerability and its implications, so they can take necessary precautions while working with the affected system or application.
+>
+>6. Monitor for Exploitation Attempts: Keep a close eye on your systems for any signs of exploitation attempts related to CVE-2024-99999. This may involve monitoring logs, network traffic, or using security tools specifically designed to detect such attacks.
+>
+>7. Stay Informed: Subscribe to security mailing lists, follow reputable cybersecurity blogs, and stay updated with the latest developments regarding this vulnerability and similar ones in the future.
+>
+>Remember that these steps are hypothetical and based on a generic CVE example. The actual remediation process may vary depending on the specific vulnerability and its impact on your system or application.
+>
+>---"
 
 
 ### 5.4 Other Interesting Observations

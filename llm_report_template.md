@@ -451,10 +451,10 @@ By manipulating HTTP headers like "User-Agent," "Referer," and "Cookie," the att
 >These patches are designed to fix specific vulnerabilities and should be applied as soon as possible.
 >
 >3. Implement Additional Security Measures: While waiting for an official patch, consider implementing additional security measures such as:
-   - Restricting access to sensitive areas of your application.
-   - Implementing input validation and sanitization techniques.
-   - Enabling logging and monitoring systems to detect any suspicious activity.
-
+>   - Restricting access to sensitive areas of your application.
+>   - Implementing input validation and sanitization techniques.
+>   - Enabling logging and monitoring systems to detect any suspicious activity.
+>
 >4. Conduct Regular Security Audits: Perform regular security audits on your web applications to identify potential vulnerabilities before they can be exploited by attackers.
 >
 >5. Educate Your Team: Ensure that all team members are aware of the vulnerability and its implications, so they can take necessary precautions while working with the affected system or application.

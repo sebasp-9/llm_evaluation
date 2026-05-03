@@ -14,7 +14,7 @@
 
 - **Keywords used:** cybersecurity, security, uncensored, dolphin
 - **Filters applied:** model size, GGUF format
-- **Other sources consulted:** none
+- **Other sources consulted:** YouTube
 - **Date of search:** 22.04.26
 
 ### 1.2 Candidate List
